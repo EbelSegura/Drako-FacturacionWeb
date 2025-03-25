@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FacturacionWebModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CSTATE">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="USERS">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usuario" Type="nvarchar" MaxLength="30" />
+          <Property Name="nombres" Type="nvarchar" MaxLength="30" />
+          <Property Name="apellidos" Type="nvarchar" MaxLength="30" />
+          <Property Name="correo" Type="nvarchar" MaxLength="150" />
+          <Property Name="clave" Type="nvarchar" MaxLength="200" />
+          <Property Name="idState" Type="int" />
+          <Property Name="fechaRegistro" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_USERS_CSTATE">
+          <End Role="CSTATE" Type="Self.CSTATE" Multiplicity="0..1" />
+          <End Role="USERS" Type="Self.USERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CSTATE">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="USERS">
+              <PropertyRef Name="idState" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FacturacionWebModelStoreContainer">
+          <EntitySet Name="CSTATE" EntityType="Self.CSTATE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_USERS_CSTATE" Association="Self.FK_USERS_CSTATE">
+            <End Role="CSTATE" EntitySet="CSTATE" />
+            <End Role="USERS" EntitySet="USERS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FacturacionWebModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="FacturacionWebEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CSTATE" EntityType="FacturacionWebModel.CSTATE" />
+          <EntitySet Name="USERS" EntityType="FacturacionWebModel.USERS" />
+          <AssociationSet Name="FK_USERS_CSTATE" Association="FacturacionWebModel.FK_USERS_CSTATE">
+            <End Role="CSTATE" EntitySet="CSTATE" />
+            <End Role="USERS" EntitySet="USERS" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CSTATE">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="USERS" Relationship="FacturacionWebModel.FK_USERS_CSTATE" FromRole="CSTATE" ToRole="USERS" />
+        </EntityType>
+        <EntityType Name="USERS">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usuario" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="nombres" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="apellidos" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="correo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="clave" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="idState" Type="Int32" />
+          <Property Name="fechaRegistro" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CSTATE" Relationship="FacturacionWebModel.FK_USERS_CSTATE" FromRole="USERS" ToRole="CSTATE" />
+        </EntityType>
+        <Association Name="FK_USERS_CSTATE">
+          <End Type="FacturacionWebModel.CSTATE" Role="CSTATE" Multiplicity="0..1" />
+          <End Type="FacturacionWebModel.USERS" Role="USERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CSTATE">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="USERS">
+              <PropertyRef Name="idState" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FacturacionWebModelStoreContainer" CdmEntityContainer="FacturacionWebEntities">
+          <EntitySetMapping Name="CSTATE">
+            <EntityTypeMapping TypeName="FacturacionWebModel.CSTATE">
+              <MappingFragment StoreEntitySet="CSTATE">
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USERS">
+            <EntityTypeMapping TypeName="FacturacionWebModel.USERS">
+              <MappingFragment StoreEntitySet="USERS">
+                <ScalarProperty Name="fechaRegistro" ColumnName="fechaRegistro" />
+                <ScalarProperty Name="idState" ColumnName="idState" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="nombres" ColumnName="nombres" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

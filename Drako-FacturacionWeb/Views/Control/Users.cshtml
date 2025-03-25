@@ -1,0 +1,104 @@
+﻿@using Drako_FacturacionWeb.Models.TableViewModels
+@model List<Drako_FacturacionWeb.Models.TableViewModels.UserTableViewModel>
+@{
+    ViewBag.Title = "Users";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    //List<SelectListItem> listaEstatus = (List<SelectListItem>)ViewBag.listaEstatus;
+}
+
+<h2>Control de Usuarios</h2>
+
+<table class="table">
+    <tr>
+        <td>
+            <label>Usuarios</label>
+        </td>
+        <td>
+            <a href="@Url.Action("AddUsers", "Control")" class="width: 300%;" style="text-align: right; display: inline-block; width: 100%; ">
+                <botton class="btn btn-outline-primary btn-sm"><i class="fa fa-plus" aria-hidden="true" style="font-size:10px; "></i> Agregar</botton>
+            </a>
+        </td>
+    </tr>
+</table>
+
+<br />
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-users me-1"></i> Usuarios
+    </div>
+    <div class="card-body table-responsive">
+        <div class="row">
+            <div class="col-12">
+                <table class=" table table-striped small table-responsive" width="100%">
+                    <thead>
+                        <tr>
+                            <th>@Html.LabelFor(p => Model[0].id)</th>
+                            <th>@Html.LabelFor(p => Model[0].usuario)</th>
+                            <th>@Html.LabelFor(p => Model[0].nombres)</th>
+                            <th>@Html.LabelFor(p => Model[0].apellidos)</th>
+                            <th>@Html.LabelFor(p => Model[0].correo)</th>
+                            <th>@Html.LabelFor(p => Model[0].idState)</th>
+                            <th>@Html.LabelFor(p => Model[0].fechaRegistro)</th>
+                            <th width="15%">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.id</td>
+                                <td>@item.usuario</td>
+                                <td>@item.nombres</td>
+                                <td>@item.apellidos</td>
+                                <td>@item.correo</td>
+                                <td>@item.tipoEstatus</td>
+                                <td>@item.fechaRegistro</td>
+                                <td>
+                                    @Html.ActionLink("Editar", "EditUsers", "Control", new { id = item.id }, new { @class = "btn btn-outline-primary btn-sm" })
+
+                                    <button type="button" onclick="mostrarPopup(@item.id)" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        Eliminar
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                @using (Html.BeginForm("DeleteUsers", "Control", FormMethod.Post, new { @id = "frmeliminarUsers" }))
+                {
+                    @Html.Hidden("txtidUsers");
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminación del usuario</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Deseas desactivar el usuario?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" onclick="Eliminar()" class="btn btn-warning">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function mostrarPopup(id) {
+        document.getElementById("txtidUsers").value = id;
+    }
+    function Eliminar() {
+        var frmeliminarUsers = document.getElementById("frmeliminarUsers");
+        frmeliminarUsers.submit();
+    }
+</script>

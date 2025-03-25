@@ -1,0 +1,93 @@
+﻿@using Drako_FacturacionWeb.Models.TableViewModels
+@model Drako_FacturacionWeb.Models.ViewModels.UserViewModels
+@{
+    ViewBag.Title = "AddUsers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<SelectListItem> listaEstatus = (List<SelectListItem>)ViewBag.listaEstatus;
+}
+
+<h2>Agregar usuario</h2>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-user me-1"></i> Agregar Usuario
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                @using (Html.BeginForm("AddUsers", "Control", FormMethod.Post, new { @id = "frmagregarUsuario" }))
+                {
+                    <div>
+                        @Html.LabelFor(p => p.usuario)
+                        @Html.TextBoxFor(p => p.usuario, new { @class = "form-control" })
+                        @Html.ValidationMessage("usuario", new { @class = "text-danger" })
+                        @if (Model != null && Model.mensajeError != null)
+                        {
+                            @Html.Label(Model.mensajeError, new { @class = "text-danger" })
+                        }
+                    </div>
+                    <div>
+                        @Html.LabelFor(p => p.nombres)
+                        @Html.TextBoxFor(p => p.nombres, new { @class = "form-control" })
+                        @Html.ValidationMessage("nombres", new { @class = "text-danger" })
+                    </div>
+                    <div>
+                        @Html.LabelFor(p => p.apellidos)
+                        @Html.TextBoxFor(p => p.apellidos, new { @class = "form-control" })
+                        @Html.ValidationMessage("apellidos", new { @class = "text-danger" })
+                    </div>
+                    <div>
+                        @Html.LabelFor(p => p.correo)
+                        @Html.TextBoxFor(p => p.correo, new { @class = "form-control" })
+                        @Html.ValidationMessage("correo", new { @class = "text-danger" })
+                    </div>
+                    <div>
+                        @Html.LabelFor(p => p.clave)
+                        @Html.PasswordFor(p => p.clave, new { @class = "form-control" })
+                        @Html.ValidationMessage("clave", new { @class = "text-danger" })
+                    </div>
+                    <div>
+                        @Html.LabelFor(p => p.confirmarClave)
+                        @Html.PasswordFor(p => p.confirmarClave, new { @class = "form-control" })
+                        @Html.ValidationMessage("confirmarClave", new { @class = "text-danger" })
+                    </div>
+                    <br />
+                    <div style="margin:auto">
+                        @*<input type="submit" class="btn btn-outline-primary" value="Guardar" />*@
+                        <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Guardar
+                        </button>
+
+                        @Html.ActionLink("Regresar", "Users", "Control", null, new { @class = "btn btn-outline-danger" })
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Actualización del perfil</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Desea agregar el nuevo usuario?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" onclick="Agregar()" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function Agregar() {
+        var frmagregarUsuario = document.getElementById("frmagregarUsuario");
+        frmagregarUsuario.submit();
+    }
+</script>
