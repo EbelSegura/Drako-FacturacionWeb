@@ -5,9 +5,25 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="888183badc3948f4bc1f2ba9543b0da2" Name="Diagram1">
-        <EntityTypeShape EntityType="FacturacionWebModel.CSTATE" Width="1.5" PointX="0.75" PointY="1.5" />
-        <EntityTypeShape EntityType="FacturacionWebModel.USERS" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="FacturacionWebModel.CLIENT" Width="1.5" PointX="4.75" PointY="19.125" />
+        <EntityTypeShape EntityType="FacturacionWebModel.COMPANY" Width="1.5" PointX="4.75" PointY="0.5" />
+        <EntityTypeShape EntityType="FacturacionWebModel.CSTATE" Width="1.5" PointX="2.5" PointY="6.625" />
+        <EntityTypeShape EntityType="FacturacionWebModel.CTYPE_INVOICE" Width="1.5" PointX="4.75" PointY="7.125" />
+        <EntityTypeShape EntityType="FacturacionWebModel.INVOICE" Width="1.5" PointX="7" PointY="4.25" />
+        <EntityTypeShape EntityType="FacturacionWebModel.PRODUCT" Width="1.5" PointX="10" PointY="10.875" />
+        <EntityTypeShape EntityType="FacturacionWebModel.TAX" Width="1.5" PointX="7" PointY="10.875" />
+        <EntityTypeShape EntityType="FacturacionWebModel.USERS" Width="1.5" PointX="4.75" PointY="15" />
+        <AssociationConnector Association="FacturacionWebModel.FK_CLIENT_CSTATE" />
+        <AssociationConnector Association="FacturacionWebModel.FK_INVOICE_CLIENT" />
+        <AssociationConnector Association="FacturacionWebModel.FK_COMPANY_CSTATE" />
+        <AssociationConnector Association="FacturacionWebModel.FK_INVOICE_COMPANY" />
+        <AssociationConnector Association="FacturacionWebModel.FK_PRODUCT_CSTATE" />
+        <AssociationConnector Association="FacturacionWebModel.FK_TAX_CSTATE" />
         <AssociationConnector Association="FacturacionWebModel.FK_USERS_CSTATE" />
+        <AssociationConnector Association="FacturacionWebModel.FK_INVOICE_CTYPE_INVOICE" />
+        <AssociationConnector Association="FacturacionWebModel.FK_INVOICE_USERS" />
+        <AssociationConnector Association="FacturacionWebModel.FK_PRODUCT_USERS" />
+        <AssociationConnector Association="FacturacionWebModel.FK_TAX_USERS1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -54,6 +55,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -61,12 +63,9 @@
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
@@ -110,6 +109,7 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -131,6 +131,7 @@
     <Compile Include="Controllers\AccessController.cs" />
     <Compile Include="Controllers\ControlController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InvoiceController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -149,14 +150,120 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BDFacturacion.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\CLIENT.cs">
+      <DependentUpon>BDFacturacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\COMPANY.cs">
+      <DependentUpon>BDFacturacion.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CSTATE.cs">
       <DependentUpon>BDFacturacion.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CTYPE_INVOICE.cs">
+      <DependentUpon>BDFacturacion.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Filters\VerifySession.cs" />
+    <Compile Include="Models\INVOICE.cs">
+      <DependentUpon>BDFacturacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PRODUCT.cs">
+      <DependentUpon>BDFacturacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SAT\Cat_ClaveProdServ.cs">
+      <DependentUpon>SATBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SAT\Cat_CodigoPostal.cs">
+      <DependentUpon>SATBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SAT\Cat_Exportacion.cs">
+      <DependentUpon>SATBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SAT\Cat_Impuesto.cs">
+      <DependentUpon>SATBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SAT\Cat_Meses.cs">
+      <DependentUpon>SATBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SAT\Cat_MetodoPago.cs">
+      <DependentUpon>SATBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SAT\Cat_Moneda.cs">
+      <DependentUpon>SATBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SAT\Cat_MotivoCancelacion.cs">
+      <DependentUpon>SATBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SAT\Cat_Pais.cs">
+      <DependentUpon>SATBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SAT\Cat_Periodicidad.cs">
+      <DependentUpon>SATBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SAT\Cat_Regimen.cs">
+      <DependentUpon>SATBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SAT\Cat_TasaCuota.cs">
+      <DependentUpon>SATBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SAT\Cat_TipoCadenaPago.cs">
+      <DependentUpon>SATBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SAT\Cat_TipoComp.cs">
+      <DependentUpon>SATBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SAT\Cat_TipoContribuyente.cs">
+      <DependentUpon>SATBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SAT\Cat_TipoDivUtil.cs">
+      <DependentUpon>SATBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SAT\Cat_TPagoRet.cs">
+      <DependentUpon>SATBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SAT\Cat_TRelacion.cs">
+      <DependentUpon>SATBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SAT\Cat_TRetencion.cs">
+      <DependentUpon>SATBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SAT\Cat_UMedida.cs">
+      <DependentUpon>SATBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SAT\Cat_UsoCFDi.cs">
+      <DependentUpon>SATBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SAT\Cat_Years.cs">
+      <DependentUpon>SATBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SAT\FormasPago.cs">
+      <DependentUpon>SATBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SAT\SATBD.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SATBD.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SAT\SATBD.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SATBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SAT\SATBD.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SATBD.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SAT\sysdiagrams.cs">
+      <DependentUpon>SATBD.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TableViewModels\UserTableViewModel.cs" />
+    <Compile Include="Models\TAX.cs">
+      <DependentUpon>BDFacturacion.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\USERS.cs">
       <DependentUpon>BDFacturacion.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModels\FacturaViewModel.cs" />
     <Compile Include="Models\ViewModels\UserViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -205,6 +312,16 @@
       <DependentUpon>BDFacturacion.edmx</DependentUpon>
       <LastGenOutput>BDFacturacion.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\SAT\SATBD.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SATBD.edmx</DependentUpon>
+      <LastGenOutput>SATBD.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\SAT\SATBD.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SATBD.edmx</DependentUpon>
+      <LastGenOutput>SATBD.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -239,6 +356,13 @@
     </EntityDeploy>
     <Content Include="Models\BDFacturacion.edmx.diagram">
       <DependentUpon>BDFacturacion.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\SAT\SATBD.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SATBD.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\SAT\SATBD.edmx.diagram">
+      <DependentUpon>SATBD.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome\all.js" />
@@ -297,9 +421,15 @@
     <Content Include="Views\Control\Users.cshtml" />
     <Content Include="Views\Control\EditUsers.cshtml" />
     <Content Include="Views\Control\AddUsers.cshtml" />
+    <Content Include="Views\Invoice\Companies.cshtml" />
+    <Content Include="Views\Invoice\Clients.cshtml" />
+    <Content Include="Views\Invoice\Concepts.cshtml" />
+    <Content Include="Views\Invoice\Invoices.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Client\" />
+    <Folder Include="Views\Company\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -308,6 +438,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CFDI4_0\CFDI4_0.csproj">
+      <Project>{85d582c0-c41e-4947-8012-2dd5a4ec9fa9}</Project>
+      <Name>CFDI4_0</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

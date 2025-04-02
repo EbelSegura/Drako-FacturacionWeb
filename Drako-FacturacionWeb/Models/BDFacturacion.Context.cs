@@ -25,7 +25,13 @@ namespace Drako_FacturacionWeb.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<CLIENT> CLIENT { get; set; }
+        public virtual DbSet<COMPANY> COMPANY { get; set; }
         public virtual DbSet<CSTATE> CSTATE { get; set; }
+        public virtual DbSet<CTYPE_INVOICE> CTYPE_INVOICE { get; set; }
+        public virtual DbSet<INVOICE> INVOICE { get; set; }
+        public virtual DbSet<PRODUCT> PRODUCT { get; set; }
+        public virtual DbSet<TAX> TAX { get; set; }
         public virtual DbSet<USERS> USERS { get; set; }
     }
 }

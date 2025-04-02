@@ -5,12 +5,119 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="FacturacionWebModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CLIENT">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="codigoPostal" Type="int" />
+          <Property Name="razonSocial" Type="nvarchar" MaxLength="300" />
+          <Property Name="nombreComercial" Type="nvarchar" MaxLength="300" />
+          <Property Name="rfcReceptor" Type="nvarchar" MaxLength="13" />
+          <Property Name="calle" Type="nvarchar" MaxLength="200" />
+          <Property Name="numExterior" Type="nvarchar" MaxLength="30" />
+          <Property Name="numInterior" Type="nvarchar" MaxLength="30" />
+          <Property Name="colonia" Type="nvarchar" MaxLength="150" />
+          <Property Name="municipio" Type="nvarchar" MaxLength="150" />
+          <Property Name="estado" Type="nvarchar" MaxLength="150" />
+          <Property Name="pais" Type="nvarchar" MaxLength="50" />
+          <Property Name="regimenFiscal" Type="int" />
+          <Property Name="idCstate" Type="int" />
+          <Property Name="correoElctronico" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="COMPANY">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="serie" Type="nvarchar" MaxLength="10" />
+          <Property Name="folio" Type="bigint" />
+          <Property Name="codigoPostal" Type="int" />
+          <Property Name="razonSocial" Type="nvarchar" MaxLength="300" />
+          <Property Name="nombreComercial" Type="nvarchar" MaxLength="300" />
+          <Property Name="rfcEmisor" Type="nvarchar" MaxLength="13" />
+          <Property Name="calle" Type="nvarchar" MaxLength="200" />
+          <Property Name="numExterior" Type="nvarchar" MaxLength="30" />
+          <Property Name="numInterior" Type="nvarchar" MaxLength="30" />
+          <Property Name="colonia" Type="nvarchar" MaxLength="150" />
+          <Property Name="municipio" Type="nvarchar" MaxLength="150" />
+          <Property Name="estado" Type="nvarchar" MaxLength="150" />
+          <Property Name="pais" Type="nvarchar" MaxLength="50" />
+          <Property Name="regimenFiscal" Type="int" />
+          <Property Name="usoCFDI" Type="int" />
+          <Property Name="iva" Type="int" />
+          <Property Name="ish" Type="int" />
+          <Property Name="certificado" Type="nvarchar" MaxLength="200" />
+          <Property Name="llave" Type="nvarchar" MaxLength="200" />
+          <Property Name="idCsate" Type="int" />
+          <Property Name="contraseña" Type="nvarchar" MaxLength="200" />
+        </EntityType>
         <EntityType Name="CSTATE">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="descripcion" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="CTYPE_INVOICE">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="names" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="INVOICE">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idSerie" Type="int" />
+          <Property Name="foliador" Type="bigint" />
+          <Property Name="idCompany" Type="int" />
+          <Property Name="idClient" Type="int" />
+          <Property Name="rfcReceptor" Type="nvarchar" MaxLength="13" />
+          <Property Name="tipoComprobante" Type="int" />
+          <Property Name="metodoPago" Type="int" />
+          <Property Name="formaPago" Type="int" />
+          <Property Name="usoCFDI" Type="int" />
+          <Property Name="moneda" Type="int" />
+          <Property Name="tipoCambio" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="UUID" Type="nvarchar" MaxLength="50" />
+          <Property Name="xmls" Type="xml" />
+          <Property Name="Total" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="idUsers" Type="int" />
+          <Property Name="fechaCreacion" Type="datetime" />
+          <Property Name="idTypeInvoice" Type="int" />
+        </EntityType>
+        <EntityType Name="PRODUCT">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idFoliador" Type="int" />
+          <Property Name="claveProdServ" Type="nvarchar" MaxLength="10" />
+          <Property Name="claveUnidad" Type="nvarchar" MaxLength="10" />
+          <Property Name="noIdentificador" Type="nvarchar" MaxLength="100" />
+          <Property Name="unidad" Type="nvarchar" MaxLength="50" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="100" />
+          <Property Name="precio" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="idCstate" Type="int" />
+          <Property Name="idUsers" Type="int" />
+        </EntityType>
+        <EntityType Name="TAX">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombres" Type="nvarchar" MaxLength="100" />
+          <Property Name="Typess_ambit" Type="nvarchar" MaxLength="15" />
+          <Property Name="Typess" Type="nvarchar" MaxLength="15" />
+          <Property Name="tasa" Type="decimal" Precision="10" Scale="0" />
+          <Property Name="claveImpuesto" Type="nvarchar" MaxLength="10" />
+          <Property Name="tipoFactor" Type="nvarchar" MaxLength="20" />
+          <Property Name="tasaOCuota" Type="nvarchar" MaxLength="20" />
+          <Property Name="idCstate" Type="int" />
+          <Property Name="idUsers" Type="int" />
         </EntityType>
         <EntityType Name="USERS">
           <Key>
@@ -25,6 +132,126 @@
           <Property Name="idState" Type="int" />
           <Property Name="fechaRegistro" Type="datetime" />
         </EntityType>
+        <Association Name="FK_CLIENT_CSTATE">
+          <End Role="CSTATE" Type="Self.CSTATE" Multiplicity="0..1" />
+          <End Role="CLIENT" Type="Self.CLIENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CSTATE">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CLIENT">
+              <PropertyRef Name="idCstate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COMPANY_CSTATE">
+          <End Role="CSTATE" Type="Self.CSTATE" Multiplicity="0..1" />
+          <End Role="COMPANY" Type="Self.COMPANY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CSTATE">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="COMPANY">
+              <PropertyRef Name="idCsate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INVOICE_CLIENT">
+          <End Role="CLIENT" Type="Self.CLIENT" Multiplicity="0..1" />
+          <End Role="INVOICE" Type="Self.INVOICE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENT">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="INVOICE">
+              <PropertyRef Name="idClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INVOICE_COMPANY">
+          <End Role="COMPANY" Type="Self.COMPANY" Multiplicity="0..1" />
+          <End Role="INVOICE" Type="Self.INVOICE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMPANY">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="INVOICE">
+              <PropertyRef Name="idCompany" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INVOICE_CTYPE_INVOICE">
+          <End Role="CTYPE_INVOICE" Type="Self.CTYPE_INVOICE" Multiplicity="0..1" />
+          <End Role="INVOICE" Type="Self.INVOICE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CTYPE_INVOICE">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="INVOICE">
+              <PropertyRef Name="idTypeInvoice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INVOICE_USERS">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="0..1" />
+          <End Role="INVOICE" Type="Self.INVOICE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="INVOICE">
+              <PropertyRef Name="idUsers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCT_CSTATE">
+          <End Role="CSTATE" Type="Self.CSTATE" Multiplicity="0..1" />
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CSTATE">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PRODUCT">
+              <PropertyRef Name="idCstate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCT_USERS">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="0..1" />
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PRODUCT">
+              <PropertyRef Name="idUsers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TAX_CSTATE">
+          <End Role="CSTATE" Type="Self.CSTATE" Multiplicity="0..1" />
+          <End Role="TAX" Type="Self.TAX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CSTATE">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TAX">
+              <PropertyRef Name="idCstate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TAX_USERS1">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="0..1" />
+          <End Role="TAX" Type="Self.TAX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TAX">
+              <PropertyRef Name="idUsers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_USERS_CSTATE">
           <End Role="CSTATE" Type="Self.CSTATE" Multiplicity="0..1" />
           <End Role="USERS" Type="Self.USERS" Multiplicity="*" />
@@ -38,8 +265,54 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="FacturacionWebModelStoreContainer">
+          <EntitySet Name="CLIENT" EntityType="Self.CLIENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COMPANY" EntityType="Self.COMPANY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CSTATE" EntityType="Self.CSTATE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CTYPE_INVOICE" EntityType="Self.CTYPE_INVOICE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INVOICE" EntityType="Self.INVOICE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCT" EntityType="Self.PRODUCT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TAX" EntityType="Self.TAX" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CLIENT_CSTATE" Association="Self.FK_CLIENT_CSTATE">
+            <End Role="CSTATE" EntitySet="CSTATE" />
+            <End Role="CLIENT" EntitySet="CLIENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COMPANY_CSTATE" Association="Self.FK_COMPANY_CSTATE">
+            <End Role="CSTATE" EntitySet="CSTATE" />
+            <End Role="COMPANY" EntitySet="COMPANY" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INVOICE_CLIENT" Association="Self.FK_INVOICE_CLIENT">
+            <End Role="CLIENT" EntitySet="CLIENT" />
+            <End Role="INVOICE" EntitySet="INVOICE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INVOICE_COMPANY" Association="Self.FK_INVOICE_COMPANY">
+            <End Role="COMPANY" EntitySet="COMPANY" />
+            <End Role="INVOICE" EntitySet="INVOICE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INVOICE_CTYPE_INVOICE" Association="Self.FK_INVOICE_CTYPE_INVOICE">
+            <End Role="CTYPE_INVOICE" EntitySet="CTYPE_INVOICE" />
+            <End Role="INVOICE" EntitySet="INVOICE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INVOICE_USERS" Association="Self.FK_INVOICE_USERS">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="INVOICE" EntitySet="INVOICE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT_CSTATE" Association="Self.FK_PRODUCT_CSTATE">
+            <End Role="CSTATE" EntitySet="CSTATE" />
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT_USERS" Association="Self.FK_PRODUCT_USERS">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TAX_CSTATE" Association="Self.FK_TAX_CSTATE">
+            <End Role="CSTATE" EntitySet="CSTATE" />
+            <End Role="TAX" EntitySet="TAX" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TAX_USERS1" Association="Self.FK_TAX_USERS1">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="TAX" EntitySet="TAX" />
+          </AssociationSet>
           <AssociationSet Name="FK_USERS_CSTATE" Association="Self.FK_USERS_CSTATE">
             <End Role="CSTATE" EntitySet="CSTATE" />
             <End Role="USERS" EntitySet="USERS" />
@@ -50,20 +323,190 @@
     <edmx:ConceptualModels>
       <Schema Namespace="FacturacionWebModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="FacturacionWebEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CLIENT" EntityType="FacturacionWebModel.CLIENT" />
+          <EntitySet Name="COMPANY" EntityType="FacturacionWebModel.COMPANY" />
           <EntitySet Name="CSTATE" EntityType="FacturacionWebModel.CSTATE" />
+          <EntitySet Name="CTYPE_INVOICE" EntityType="FacturacionWebModel.CTYPE_INVOICE" />
+          <EntitySet Name="INVOICE" EntityType="FacturacionWebModel.INVOICE" />
+          <EntitySet Name="PRODUCT" EntityType="FacturacionWebModel.PRODUCT" />
+          <EntitySet Name="TAX" EntityType="FacturacionWebModel.TAX" />
           <EntitySet Name="USERS" EntityType="FacturacionWebModel.USERS" />
+          <AssociationSet Name="FK_CLIENT_CSTATE" Association="FacturacionWebModel.FK_CLIENT_CSTATE">
+            <End Role="CSTATE" EntitySet="CSTATE" />
+            <End Role="CLIENT" EntitySet="CLIENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INVOICE_CLIENT" Association="FacturacionWebModel.FK_INVOICE_CLIENT">
+            <End Role="CLIENT" EntitySet="CLIENT" />
+            <End Role="INVOICE" EntitySet="INVOICE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COMPANY_CSTATE" Association="FacturacionWebModel.FK_COMPANY_CSTATE">
+            <End Role="CSTATE" EntitySet="CSTATE" />
+            <End Role="COMPANY" EntitySet="COMPANY" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INVOICE_COMPANY" Association="FacturacionWebModel.FK_INVOICE_COMPANY">
+            <End Role="COMPANY" EntitySet="COMPANY" />
+            <End Role="INVOICE" EntitySet="INVOICE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT_CSTATE" Association="FacturacionWebModel.FK_PRODUCT_CSTATE">
+            <End Role="CSTATE" EntitySet="CSTATE" />
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TAX_CSTATE" Association="FacturacionWebModel.FK_TAX_CSTATE">
+            <End Role="CSTATE" EntitySet="CSTATE" />
+            <End Role="TAX" EntitySet="TAX" />
+          </AssociationSet>
           <AssociationSet Name="FK_USERS_CSTATE" Association="FacturacionWebModel.FK_USERS_CSTATE">
             <End Role="CSTATE" EntitySet="CSTATE" />
             <End Role="USERS" EntitySet="USERS" />
           </AssociationSet>
+          <AssociationSet Name="FK_INVOICE_CTYPE_INVOICE" Association="FacturacionWebModel.FK_INVOICE_CTYPE_INVOICE">
+            <End Role="CTYPE_INVOICE" EntitySet="CTYPE_INVOICE" />
+            <End Role="INVOICE" EntitySet="INVOICE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INVOICE_USERS" Association="FacturacionWebModel.FK_INVOICE_USERS">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="INVOICE" EntitySet="INVOICE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT_USERS" Association="FacturacionWebModel.FK_PRODUCT_USERS">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TAX_USERS1" Association="FacturacionWebModel.FK_TAX_USERS1">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="TAX" EntitySet="TAX" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="CLIENT">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="codigoPostal" Type="Int32" />
+          <Property Name="razonSocial" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="nombreComercial" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="rfcReceptor" Type="String" MaxLength="13" FixedLength="false" Unicode="true" />
+          <Property Name="calle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="numExterior" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="numInterior" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="colonia" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="municipio" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="estado" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="pais" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="regimenFiscal" Type="Int32" />
+          <Property Name="idCstate" Type="Int32" />
+          <Property Name="correoElctronico" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CSTATE" Relationship="FacturacionWebModel.FK_CLIENT_CSTATE" FromRole="CLIENT" ToRole="CSTATE" />
+          <NavigationProperty Name="INVOICE" Relationship="FacturacionWebModel.FK_INVOICE_CLIENT" FromRole="CLIENT" ToRole="INVOICE" />
+        </EntityType>
+        <EntityType Name="COMPANY">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="serie" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="folio" Type="Int64" />
+          <Property Name="codigoPostal" Type="Int32" />
+          <Property Name="razonSocial" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="nombreComercial" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="rfcEmisor" Type="String" MaxLength="13" FixedLength="false" Unicode="true" />
+          <Property Name="calle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="numExterior" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="numInterior" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="colonia" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="municipio" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="estado" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="pais" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="regimenFiscal" Type="Int32" />
+          <Property Name="usoCFDI" Type="Int32" />
+          <Property Name="iva" Type="Int32" />
+          <Property Name="ish" Type="Int32" />
+          <Property Name="certificado" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="llave" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="idCsate" Type="Int32" />
+          <Property Name="contraseña" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CSTATE" Relationship="FacturacionWebModel.FK_COMPANY_CSTATE" FromRole="COMPANY" ToRole="CSTATE" />
+          <NavigationProperty Name="INVOICE" Relationship="FacturacionWebModel.FK_INVOICE_COMPANY" FromRole="COMPANY" ToRole="INVOICE" />
+        </EntityType>
         <EntityType Name="CSTATE">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="descripcion" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CLIENT" Relationship="FacturacionWebModel.FK_CLIENT_CSTATE" FromRole="CSTATE" ToRole="CLIENT" />
+          <NavigationProperty Name="COMPANY" Relationship="FacturacionWebModel.FK_COMPANY_CSTATE" FromRole="CSTATE" ToRole="COMPANY" />
+          <NavigationProperty Name="PRODUCT" Relationship="FacturacionWebModel.FK_PRODUCT_CSTATE" FromRole="CSTATE" ToRole="PRODUCT" />
+          <NavigationProperty Name="TAX" Relationship="FacturacionWebModel.FK_TAX_CSTATE" FromRole="CSTATE" ToRole="TAX" />
           <NavigationProperty Name="USERS" Relationship="FacturacionWebModel.FK_USERS_CSTATE" FromRole="CSTATE" ToRole="USERS" />
+        </EntityType>
+        <EntityType Name="CTYPE_INVOICE">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="names" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="INVOICE" Relationship="FacturacionWebModel.FK_INVOICE_CTYPE_INVOICE" FromRole="CTYPE_INVOICE" ToRole="INVOICE" />
+        </EntityType>
+        <EntityType Name="INVOICE">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idSerie" Type="Int32" />
+          <Property Name="foliador" Type="Int64" />
+          <Property Name="idCompany" Type="Int32" />
+          <Property Name="idClient" Type="Int32" />
+          <Property Name="rfcReceptor" Type="String" MaxLength="13" FixedLength="false" Unicode="true" />
+          <Property Name="tipoComprobante" Type="Int32" />
+          <Property Name="metodoPago" Type="Int32" />
+          <Property Name="formaPago" Type="Int32" />
+          <Property Name="usoCFDI" Type="Int32" />
+          <Property Name="moneda" Type="Int32" />
+          <Property Name="tipoCambio" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="UUID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="xmls" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Total" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="idUsers" Type="Int32" />
+          <Property Name="fechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="idTypeInvoice" Type="Int32" />
+          <NavigationProperty Name="CLIENT" Relationship="FacturacionWebModel.FK_INVOICE_CLIENT" FromRole="INVOICE" ToRole="CLIENT" />
+          <NavigationProperty Name="COMPANY" Relationship="FacturacionWebModel.FK_INVOICE_COMPANY" FromRole="INVOICE" ToRole="COMPANY" />
+          <NavigationProperty Name="CTYPE_INVOICE" Relationship="FacturacionWebModel.FK_INVOICE_CTYPE_INVOICE" FromRole="INVOICE" ToRole="CTYPE_INVOICE" />
+          <NavigationProperty Name="USERS" Relationship="FacturacionWebModel.FK_INVOICE_USERS" FromRole="INVOICE" ToRole="USERS" />
+        </EntityType>
+        <EntityType Name="PRODUCT">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idFoliador" Type="Int32" />
+          <Property Name="claveProdServ" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="claveUnidad" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="noIdentificador" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="unidad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="precio" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="idCstate" Type="Int32" />
+          <Property Name="idUsers" Type="Int32" />
+          <NavigationProperty Name="CSTATE" Relationship="FacturacionWebModel.FK_PRODUCT_CSTATE" FromRole="PRODUCT" ToRole="CSTATE" />
+          <NavigationProperty Name="USERS" Relationship="FacturacionWebModel.FK_PRODUCT_USERS" FromRole="PRODUCT" ToRole="USERS" />
+        </EntityType>
+        <EntityType Name="TAX">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombres" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Typess_ambit" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Typess" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="tasa" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="claveImpuesto" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="tipoFactor" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="tasaOCuota" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="idCstate" Type="Int32" />
+          <Property Name="idUsers" Type="Int32" />
+          <NavigationProperty Name="CSTATE" Relationship="FacturacionWebModel.FK_TAX_CSTATE" FromRole="TAX" ToRole="CSTATE" />
+          <NavigationProperty Name="USERS" Relationship="FacturacionWebModel.FK_TAX_USERS1" FromRole="TAX" ToRole="USERS" />
         </EntityType>
         <EntityType Name="USERS">
           <Key>
@@ -78,7 +521,82 @@
           <Property Name="idState" Type="Int32" />
           <Property Name="fechaRegistro" Type="DateTime" Precision="3" />
           <NavigationProperty Name="CSTATE" Relationship="FacturacionWebModel.FK_USERS_CSTATE" FromRole="USERS" ToRole="CSTATE" />
+          <NavigationProperty Name="INVOICE" Relationship="FacturacionWebModel.FK_INVOICE_USERS" FromRole="USERS" ToRole="INVOICE" />
+          <NavigationProperty Name="PRODUCT" Relationship="FacturacionWebModel.FK_PRODUCT_USERS" FromRole="USERS" ToRole="PRODUCT" />
+          <NavigationProperty Name="TAX" Relationship="FacturacionWebModel.FK_TAX_USERS1" FromRole="USERS" ToRole="TAX" />
         </EntityType>
+        <Association Name="FK_CLIENT_CSTATE">
+          <End Type="FacturacionWebModel.CSTATE" Role="CSTATE" Multiplicity="0..1" />
+          <End Type="FacturacionWebModel.CLIENT" Role="CLIENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CSTATE">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CLIENT">
+              <PropertyRef Name="idCstate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INVOICE_CLIENT">
+          <End Type="FacturacionWebModel.CLIENT" Role="CLIENT" Multiplicity="0..1" />
+          <End Type="FacturacionWebModel.INVOICE" Role="INVOICE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENT">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="INVOICE">
+              <PropertyRef Name="idClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COMPANY_CSTATE">
+          <End Type="FacturacionWebModel.CSTATE" Role="CSTATE" Multiplicity="0..1" />
+          <End Type="FacturacionWebModel.COMPANY" Role="COMPANY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CSTATE">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="COMPANY">
+              <PropertyRef Name="idCsate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INVOICE_COMPANY">
+          <End Type="FacturacionWebModel.COMPANY" Role="COMPANY" Multiplicity="0..1" />
+          <End Type="FacturacionWebModel.INVOICE" Role="INVOICE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMPANY">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="INVOICE">
+              <PropertyRef Name="idCompany" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCT_CSTATE">
+          <End Type="FacturacionWebModel.CSTATE" Role="CSTATE" Multiplicity="0..1" />
+          <End Type="FacturacionWebModel.PRODUCT" Role="PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CSTATE">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PRODUCT">
+              <PropertyRef Name="idCstate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TAX_CSTATE">
+          <End Type="FacturacionWebModel.CSTATE" Role="CSTATE" Multiplicity="0..1" />
+          <End Type="FacturacionWebModel.TAX" Role="TAX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CSTATE">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TAX">
+              <PropertyRef Name="idCstate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_USERS_CSTATE">
           <End Type="FacturacionWebModel.CSTATE" Role="CSTATE" Multiplicity="0..1" />
           <End Type="FacturacionWebModel.USERS" Role="USERS" Multiplicity="*" />
@@ -91,16 +609,177 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_INVOICE_CTYPE_INVOICE">
+          <End Type="FacturacionWebModel.CTYPE_INVOICE" Role="CTYPE_INVOICE" Multiplicity="0..1" />
+          <End Type="FacturacionWebModel.INVOICE" Role="INVOICE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CTYPE_INVOICE">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="INVOICE">
+              <PropertyRef Name="idTypeInvoice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INVOICE_USERS">
+          <End Type="FacturacionWebModel.USERS" Role="USERS" Multiplicity="0..1" />
+          <End Type="FacturacionWebModel.INVOICE" Role="INVOICE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="INVOICE">
+              <PropertyRef Name="idUsers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCT_USERS">
+          <End Type="FacturacionWebModel.USERS" Role="USERS" Multiplicity="0..1" />
+          <End Type="FacturacionWebModel.PRODUCT" Role="PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PRODUCT">
+              <PropertyRef Name="idUsers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TAX_USERS1">
+          <End Type="FacturacionWebModel.USERS" Role="USERS" Multiplicity="0..1" />
+          <End Type="FacturacionWebModel.TAX" Role="TAX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TAX">
+              <PropertyRef Name="idUsers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="FacturacionWebModelStoreContainer" CdmEntityContainer="FacturacionWebEntities">
+          <EntitySetMapping Name="CLIENT">
+            <EntityTypeMapping TypeName="FacturacionWebModel.CLIENT">
+              <MappingFragment StoreEntitySet="CLIENT">
+                <ScalarProperty Name="correoElctronico" ColumnName="correoElctronico" />
+                <ScalarProperty Name="idCstate" ColumnName="idCstate" />
+                <ScalarProperty Name="regimenFiscal" ColumnName="regimenFiscal" />
+                <ScalarProperty Name="pais" ColumnName="pais" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="municipio" ColumnName="municipio" />
+                <ScalarProperty Name="colonia" ColumnName="colonia" />
+                <ScalarProperty Name="numInterior" ColumnName="numInterior" />
+                <ScalarProperty Name="numExterior" ColumnName="numExterior" />
+                <ScalarProperty Name="calle" ColumnName="calle" />
+                <ScalarProperty Name="rfcReceptor" ColumnName="rfcReceptor" />
+                <ScalarProperty Name="nombreComercial" ColumnName="nombreComercial" />
+                <ScalarProperty Name="razonSocial" ColumnName="razonSocial" />
+                <ScalarProperty Name="codigoPostal" ColumnName="codigoPostal" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COMPANY">
+            <EntityTypeMapping TypeName="FacturacionWebModel.COMPANY">
+              <MappingFragment StoreEntitySet="COMPANY">
+                <ScalarProperty Name="contraseña" ColumnName="contraseña" />
+                <ScalarProperty Name="idCsate" ColumnName="idCsate" />
+                <ScalarProperty Name="llave" ColumnName="llave" />
+                <ScalarProperty Name="certificado" ColumnName="certificado" />
+                <ScalarProperty Name="ish" ColumnName="ish" />
+                <ScalarProperty Name="iva" ColumnName="iva" />
+                <ScalarProperty Name="usoCFDI" ColumnName="usoCFDI" />
+                <ScalarProperty Name="regimenFiscal" ColumnName="regimenFiscal" />
+                <ScalarProperty Name="pais" ColumnName="pais" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="municipio" ColumnName="municipio" />
+                <ScalarProperty Name="colonia" ColumnName="colonia" />
+                <ScalarProperty Name="numInterior" ColumnName="numInterior" />
+                <ScalarProperty Name="numExterior" ColumnName="numExterior" />
+                <ScalarProperty Name="calle" ColumnName="calle" />
+                <ScalarProperty Name="rfcEmisor" ColumnName="rfcEmisor" />
+                <ScalarProperty Name="nombreComercial" ColumnName="nombreComercial" />
+                <ScalarProperty Name="razonSocial" ColumnName="razonSocial" />
+                <ScalarProperty Name="codigoPostal" ColumnName="codigoPostal" />
+                <ScalarProperty Name="folio" ColumnName="folio" />
+                <ScalarProperty Name="serie" ColumnName="serie" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="CSTATE">
             <EntityTypeMapping TypeName="FacturacionWebModel.CSTATE">
               <MappingFragment StoreEntitySet="CSTATE">
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CTYPE_INVOICE">
+            <EntityTypeMapping TypeName="FacturacionWebModel.CTYPE_INVOICE">
+              <MappingFragment StoreEntitySet="CTYPE_INVOICE">
+                <ScalarProperty Name="names" ColumnName="names" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INVOICE">
+            <EntityTypeMapping TypeName="FacturacionWebModel.INVOICE">
+              <MappingFragment StoreEntitySet="INVOICE">
+                <ScalarProperty Name="idTypeInvoice" ColumnName="idTypeInvoice" />
+                <ScalarProperty Name="fechaCreacion" ColumnName="fechaCreacion" />
+                <ScalarProperty Name="idUsers" ColumnName="idUsers" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="xmls" ColumnName="xmls" />
+                <ScalarProperty Name="UUID" ColumnName="UUID" />
+                <ScalarProperty Name="tipoCambio" ColumnName="tipoCambio" />
+                <ScalarProperty Name="moneda" ColumnName="moneda" />
+                <ScalarProperty Name="usoCFDI" ColumnName="usoCFDI" />
+                <ScalarProperty Name="formaPago" ColumnName="formaPago" />
+                <ScalarProperty Name="metodoPago" ColumnName="metodoPago" />
+                <ScalarProperty Name="tipoComprobante" ColumnName="tipoComprobante" />
+                <ScalarProperty Name="rfcReceptor" ColumnName="rfcReceptor" />
+                <ScalarProperty Name="idClient" ColumnName="idClient" />
+                <ScalarProperty Name="idCompany" ColumnName="idCompany" />
+                <ScalarProperty Name="foliador" ColumnName="foliador" />
+                <ScalarProperty Name="idSerie" ColumnName="idSerie" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCT">
+            <EntityTypeMapping TypeName="FacturacionWebModel.PRODUCT">
+              <MappingFragment StoreEntitySet="PRODUCT">
+                <ScalarProperty Name="idUsers" ColumnName="idUsers" />
+                <ScalarProperty Name="idCstate" ColumnName="idCstate" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="unidad" ColumnName="unidad" />
+                <ScalarProperty Name="noIdentificador" ColumnName="noIdentificador" />
+                <ScalarProperty Name="claveUnidad" ColumnName="claveUnidad" />
+                <ScalarProperty Name="claveProdServ" ColumnName="claveProdServ" />
+                <ScalarProperty Name="idFoliador" ColumnName="idFoliador" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAX">
+            <EntityTypeMapping TypeName="FacturacionWebModel.TAX">
+              <MappingFragment StoreEntitySet="TAX">
+                <ScalarProperty Name="idUsers" ColumnName="idUsers" />
+                <ScalarProperty Name="idCstate" ColumnName="idCstate" />
+                <ScalarProperty Name="tasaOCuota" ColumnName="tasaOCuota" />
+                <ScalarProperty Name="tipoFactor" ColumnName="tipoFactor" />
+                <ScalarProperty Name="claveImpuesto" ColumnName="claveImpuesto" />
+                <ScalarProperty Name="tasa" ColumnName="tasa" />
+                <ScalarProperty Name="Typess" ColumnName="Typess" />
+                <ScalarProperty Name="Typess_ambit" ColumnName="Typess_ambit" />
+                <ScalarProperty Name="nombres" ColumnName="nombres" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -12,31 +12,39 @@ namespace Drako_FacturacionWeb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class USERS
+    public partial class COMPANY
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public USERS()
+        public COMPANY()
         {
             this.INVOICE = new HashSet<INVOICE>();
-            this.PRODUCT = new HashSet<PRODUCT>();
-            this.TAX = new HashSet<TAX>();
         }
     
         public int id { get; set; }
-        public string usuario { get; set; }
-        public string nombres { get; set; }
-        public string apellidos { get; set; }
-        public string correo { get; set; }
-        public string clave { get; set; }
-        public Nullable<int> idState { get; set; }
-        public Nullable<System.DateTime> fechaRegistro { get; set; }
+        public string serie { get; set; }
+        public Nullable<long> folio { get; set; }
+        public Nullable<int> codigoPostal { get; set; }
+        public string razonSocial { get; set; }
+        public string nombreComercial { get; set; }
+        public string rfcEmisor { get; set; }
+        public string calle { get; set; }
+        public string numExterior { get; set; }
+        public string numInterior { get; set; }
+        public string colonia { get; set; }
+        public string municipio { get; set; }
+        public string estado { get; set; }
+        public string pais { get; set; }
+        public Nullable<int> regimenFiscal { get; set; }
+        public Nullable<int> usoCFDI { get; set; }
+        public Nullable<int> iva { get; set; }
+        public Nullable<int> ish { get; set; }
+        public string certificado { get; set; }
+        public string llave { get; set; }
+        public Nullable<int> idCsate { get; set; }
+        public string contraseña { get; set; }
     
         public virtual CSTATE CSTATE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<INVOICE> INVOICE { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PRODUCT> PRODUCT { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TAX> TAX { get; set; }
     }
 }
